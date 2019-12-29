@@ -1,0 +1,40 @@
+---
+# tasks file for mongocentos
+ - name: Copy mongodb repository 
+   copy: src=files/mongodb-org-3.6.repo dest=/etc/yum.repos.d/mongodb-org-3.6.repo
+ - name: Install mongodb
+   yum: name=mongodb-org state=latest
+ - name: remove mongod default a file
+   file:
+     path: /etc/mongod.conf
+     state: absent
+ - name: mongod conf copy
+   template:
+    src: mongodc.j2
+    dest: /etc/mongod.conf
+   notify:
+    - start  
+ # - name: install python tools
+ #  yum:
+ #    name: python-devel 
+ #    state: latest
+#  with_items:
+# - {name: 'gcc', 'python-devel', 'python-setuptools', 'python-pip'}
+ - name: install pymongo
+   pip:
+     name: pymongo 
+     state: latest
+ - name: add admin user to mongodb
+   mongodb_user:
+     login_port: '27017'
+     database: "admin"
+     name: "arshi"
+     password: "12345"
+     roles: userAdminAnyDatabase
+     state: present        
+ - mongodb_user:
+    database: "admin"
+    name: "bob"
+    password: "12345"
+    state: present
+     
