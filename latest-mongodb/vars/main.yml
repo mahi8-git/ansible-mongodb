@@ -1,0 +1,4 @@
+---
+# vars file for mongodbserver
+bind: 0.0.0.0
+

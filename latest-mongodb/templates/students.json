@@ -1,0 +1,2 @@
+{
+  "name":"mahaboob", "age":"18", "year":NumberInt(2020), "major":"Computer Science", "address":{          "city": "hyderbad",          "state": "ts"} }
