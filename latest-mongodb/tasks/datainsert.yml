@@ -1,0 +1,9 @@
+---
+ - name: copy data into data base
+   template:
+      src: primer-dataset.j2
+      dest: /tmp/primer-dataset.json      
+ - name: insert collection in to db
+   shell:
+       mongoimport --db us-restaurants --collection restaurants --file /tmp/primer-dataset.json
+
